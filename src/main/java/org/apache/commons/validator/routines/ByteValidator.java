@@ -62,7 +62,7 @@ import java.util.Locale;
  *
  * @since 1.3.0
  */
-public class ByteValidator extends AbstractNumberValidator {
+public class ByteValidator extends AbstractNumberValidator<Byte> {
 
     private static final long serialVersionUID = 7001640945881854649L;
 
@@ -193,7 +193,7 @@ public class ByteValidator extends AbstractNumberValidator {
      *   {@code Byte} if valid or {@code null} if invalid.
      */
     @Override
-    protected Object processParsedValue(final Object value, final Format formatter) {
+    protected Byte processParsedValue(final Object value, final Format formatter) {
 
         // Parsed value will be Long if it fits in a long and is not fractional
         if (value instanceof Long) {

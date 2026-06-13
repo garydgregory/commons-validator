@@ -65,7 +65,7 @@ import java.util.Locale;
  *
  * @since 1.3.0
  */
-public class BigDecimalValidator extends AbstractNumberValidator {
+public class BigDecimalValidator extends AbstractNumberValidator<BigDecimal> {
 
     private static final long serialVersionUID = -670320911490506772L;
 
@@ -171,19 +171,17 @@ public class BigDecimalValidator extends AbstractNumberValidator {
      *         {@code BigDecimal}.
      */
     @Override
-    protected Object processParsedValue(final Object value, final Format formatter) {
+    protected BigDecimal processParsedValue(final Object value, final Format formatter) {
         BigDecimal decimal;
         if (value instanceof Long) {
             decimal = BigDecimal.valueOf(((Long) value).longValue());
         } else {
             decimal = new BigDecimal(value.toString());
         }
-
         final int scale = determineScale((NumberFormat) formatter);
         if (scale >= 0) {
             decimal = decimal.setScale(scale, BigDecimal.ROUND_DOWN);
         }
-
         return decimal;
     }
 

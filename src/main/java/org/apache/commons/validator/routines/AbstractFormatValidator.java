@@ -28,9 +28,10 @@ import java.util.Locale;
  * This is a <em>base</em> class for building Date and Number Validators using format parsing.
  * </p>
  *
+ * @param <R> The type validated.
  * @since 1.3.0
  */
-public abstract class AbstractFormatValidator implements Serializable {
+public abstract class AbstractFormatValidator<R> implements Serializable {
 
     private static final long serialVersionUID = -4690687565200568258L;
 
@@ -194,5 +195,5 @@ public abstract class AbstractFormatValidator implements Serializable {
      * @param formatter The Format used to parse the value with.
      * @return The parsed value converted to the appropriate type if valid or {@code null} if invalid.
      */
-    protected abstract Object processParsedValue(Object value, Format formatter);
+    protected abstract R processParsedValue(Object value, Format formatter);
 }

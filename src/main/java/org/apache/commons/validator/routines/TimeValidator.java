@@ -176,7 +176,7 @@ public class TimeValidator extends AbstractCalendarValidator {
      * @return The parsed value converted to a {@link Calendar}.
      */
     @Override
-    protected Object processParsedValue(final Object value, final Format formatter) {
+    protected Calendar processParsedValue(final Object value, final Format formatter) {
         return ((DateFormat) formatter).getCalendar();
     }
 

@@ -62,7 +62,7 @@ import java.util.Locale;
  *
  * @since 1.3.0
  */
-public class DoubleValidator extends AbstractNumberValidator {
+public class DoubleValidator extends AbstractNumberValidator<Double> {
 
     private static final long serialVersionUID = 5867946581318211330L;
 
@@ -192,9 +192,9 @@ public class DoubleValidator extends AbstractNumberValidator {
      * or {@code null} if invalid.
      */
     @Override
-    protected Object processParsedValue(final Object value, final Format formatter) {
+    protected Double processParsedValue(final Object value, final Format formatter) {
         if (value instanceof Double) {
-            return value;
+            return (Double) value;
         }
         return Double.valueOf(((Number) value).doubleValue());
     }

@@ -62,7 +62,7 @@ import java.util.Locale;
  *
  * @since 1.3.0
  */
-public class ShortValidator extends AbstractNumberValidator {
+public class ShortValidator extends AbstractNumberValidator<Short> {
 
     private static final long serialVersionUID = -5227510699747787066L;
 
@@ -193,12 +193,9 @@ public class ShortValidator extends AbstractNumberValidator {
      *   {@code Short} if valid or {@code null} if invalid.
      */
     @Override
-    protected Object processParsedValue(final Object value, final Format formatter) {
-
+    protected Short processParsedValue(final Object value, final Format formatter) {
         final long longValue = ((Number) value).longValue();
-
-        if (longValue < Short.MIN_VALUE ||
-            longValue > Short.MAX_VALUE) {
+        if (longValue < Short.MIN_VALUE || longValue > Short.MAX_VALUE) {
             return null;
         }
         return Short.valueOf((short) longValue);

@@ -61,7 +61,7 @@ import java.util.Locale;
  *
  * @since 1.3.0
  */
-public class LongValidator extends AbstractNumberValidator {
+public class LongValidator extends AbstractNumberValidator<Long> {
 
     private static final long serialVersionUID = -5117231731027866098L;
 
@@ -191,14 +191,12 @@ public class LongValidator extends AbstractNumberValidator {
      *         {@code Long}.
      */
     @Override
-    protected Object processParsedValue(final Object value, final Format formatter) {
-
+    protected Long processParsedValue(final Object value, final Format formatter) {
         // Parsed value will be Long if it fits in a long and is not fractional
         if (value instanceof Long) {
-            return value;
+            return (Long) value;
         }
         return null;
-
     }
 
     /**

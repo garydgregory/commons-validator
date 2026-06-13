@@ -25,14 +25,16 @@ import java.util.Locale;
 import org.apache.commons.validator.GenericValidator;
 
 /**
- * Abstract class for Number Validation.
+ * Abstracts validation for {@link Number} validation.
  *
- * <p>This is a <em>base</em> class for building Number
- *    Validators using format parsing.</p>
+ * <p>
+ * This is a <em>base</em> class for building Number Validators using format parsing.
+ * </p>
  *
+ * @param <R> The type of Number validated.
  * @since 1.3.0
  */
-public abstract class AbstractNumberValidator extends AbstractFormatValidator {
+public abstract class AbstractNumberValidator<R extends Number> extends AbstractFormatValidator<R> {
 
     private static final long serialVersionUID = -3088817875906765463L;
 
@@ -262,5 +264,5 @@ public abstract class AbstractNumberValidator extends AbstractFormatValidator {
      * @return The parsed value converted to the appropriate type if valid or {@code null} if invalid.
      */
     @Override
-    protected abstract Object processParsedValue(Object value, Format formatter);
+    protected abstract R processParsedValue(Object value, Format formatter);
 }

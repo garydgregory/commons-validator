@@ -34,7 +34,7 @@ import org.apache.commons.validator.GenericValidator;
  *
  * @since 1.3.0
  */
-public abstract class AbstractCalendarValidator extends AbstractFormatValidator {
+public abstract class AbstractCalendarValidator extends AbstractFormatValidator<Object> { // Date and Calendar
 
     private static final long serialVersionUID = -1410008585975827379L;
 
@@ -88,7 +88,6 @@ public abstract class AbstractCalendarValidator extends AbstractFormatValidator 
     private int calculateQuarter(final Calendar calendar, final int monthOfFirstQuarter) {
         // Add Year
         int year = calendar.get(Calendar.YEAR);
-
         final int month = calendar.get(Calendar.MONTH) + 1;
         final int relativeMonth = month >= monthOfFirstQuarter
                           ? month - monthOfFirstQuarter
@@ -114,47 +113,36 @@ public abstract class AbstractCalendarValidator extends AbstractFormatValidator 
      *         if it is less than the second or +1 if it is greater than the second.
      */
     protected int compare(final Calendar value, final Calendar compare, final int field) {
-
         int result;
-
         // Compare Year
         result = calculateCompareResult(value, compare, Calendar.YEAR);
         if (result != 0 || field == Calendar.YEAR) {
             return result;
         }
-
         // Compare Week of Year
         if (field == Calendar.WEEK_OF_YEAR) {
             return calculateCompareResult(value, compare, Calendar.WEEK_OF_YEAR);
         }
-
         // Compare Day of the Year
         if (field == Calendar.DAY_OF_YEAR) {
             return calculateCompareResult(value, compare, Calendar.DAY_OF_YEAR);
         }
-
         // Compare Month
         result = calculateCompareResult(value, compare, Calendar.MONTH);
         if (result != 0 || field == Calendar.MONTH) {
             return result;
         }
-
         // Compare Week of Month
         if (field == Calendar.WEEK_OF_MONTH) {
             return calculateCompareResult(value, compare, Calendar.WEEK_OF_MONTH);
         }
-
         // Compare Date
         result = calculateCompareResult(value, compare, Calendar.DATE);
-        if (result != 0 || field == Calendar.DATE ||
-                          field == Calendar.DAY_OF_WEEK ||
-                          field == Calendar.DAY_OF_WEEK_IN_MONTH) {
+        if (result != 0 || field == Calendar.DATE || field == Calendar.DAY_OF_WEEK || field == Calendar.DAY_OF_WEEK_IN_MONTH) {
             return result;
         }
-
         // Compare Time fields
         return compareTime(value, compare, field);
-
     }
 
     /**
@@ -186,34 +174,27 @@ public abstract class AbstractCalendarValidator extends AbstractFormatValidator 
      *         if it is less than the second or +1 if it is greater than the second.
      */
     protected int compareTime(final Calendar value, final Calendar compare, final int field) {
-
         int result;
-
         // Compare Hour
         result = calculateCompareResult(value, compare, Calendar.HOUR_OF_DAY);
         if (result != 0 || field == Calendar.HOUR || field == Calendar.HOUR_OF_DAY) {
             return result;
         }
-
         // Compare Minute
         result = calculateCompareResult(value, compare, Calendar.MINUTE);
         if (result != 0 || field == Calendar.MINUTE) {
             return result;
         }
-
         // Compare Second
         result = calculateCompareResult(value, compare, Calendar.SECOND);
         if (result != 0 || field == Calendar.SECOND) {
             return result;
         }
-
         // Compare Milliseconds
         if (field == Calendar.MILLISECOND) {
             return calculateCompareResult(value, compare, Calendar.MILLISECOND);
         }
-
         throw new IllegalArgumentException("Invalid field: " + field);
-
     }
 
     /**
@@ -405,15 +386,4 @@ public abstract class AbstractCalendarValidator extends AbstractFormatValidator 
 
     }
 
-    /**
-     * rocess the parsed value, performing any further validation
-     *    and type conversion required.
-     *
-     * @param value The parsed object created.
-     * @param formatter The Format used to parse the value with.
-     * @return The parsed value converted to the appropriate type
-     *         if valid or {@code null} if invalid.
-     */
-    @Override
-    protected abstract Object processParsedValue(Object value, Format formatter);
 }

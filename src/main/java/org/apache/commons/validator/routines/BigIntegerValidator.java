@@ -64,7 +64,7 @@ import java.util.Locale;
  *
  * @since 1.3.0
  */
-public class BigIntegerValidator extends AbstractNumberValidator {
+public class BigIntegerValidator extends AbstractNumberValidator<BigInteger> {
 
     private static final long serialVersionUID = 6713144356347139988L;
 
@@ -157,7 +157,7 @@ public class BigIntegerValidator extends AbstractNumberValidator {
      *         {@code BigInteger}.
      */
     @Override
-    protected Object processParsedValue(final Object value, final Format formatter) {
+    protected BigInteger processParsedValue(final Object value, final Format formatter) {
         if (value instanceof Long) {
             return BigInteger.valueOf(((Long) value).longValue());
         }

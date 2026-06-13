@@ -93,13 +93,11 @@ public class CurrencyValidator extends BigDecimalValidator {
      */
     @Override
     protected Object parse(final String value, final Format formatter) {
-
         // Initial parse of the value
         Object parsedValue = super.parse(value, formatter);
         if (parsedValue != null || !(formatter instanceof DecimalFormat)) {
             return parsedValue;
         }
-
         // Re-parse using a pattern without the currency symbol
         final DecimalFormat decimalFormat = (DecimalFormat) formatter;
         final String pattern = decimalFormat.toPattern();

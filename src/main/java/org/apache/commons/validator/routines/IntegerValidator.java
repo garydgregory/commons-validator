@@ -62,7 +62,7 @@ import java.util.Locale;
  *
  * @since 1.3.0
  */
-public class IntegerValidator extends AbstractNumberValidator {
+public class IntegerValidator extends AbstractNumberValidator<Integer> {
 
     private static final long serialVersionUID = 422081746310306596L;
 
@@ -193,13 +193,11 @@ public class IntegerValidator extends AbstractNumberValidator {
      *   {@code Integer} if valid or {@code null} if invalid.
      */
     @Override
-    protected Object processParsedValue(final Object value, final Format formatter) {
-
+    protected Integer processParsedValue(final Object value, final Format formatter) {
         // Parsed value will be Long if it fits in a long and is not fractional
         if (value instanceof Long) {
             final long longValue = ((Long) value).longValue();
-            if (longValue >= Integer.MIN_VALUE &&
-                longValue <= Integer.MAX_VALUE) {
+            if (longValue >= Integer.MIN_VALUE && longValue <= Integer.MAX_VALUE) {
                 return Integer.valueOf((int) longValue);
             }
         }

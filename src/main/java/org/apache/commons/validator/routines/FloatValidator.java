@@ -62,7 +62,7 @@ import java.util.Locale;
  *
  * @since 1.3.0
  */
-public class FloatValidator extends AbstractNumberValidator {
+public class FloatValidator extends AbstractNumberValidator<Float> {
 
     private static final long serialVersionUID = -4513245432806414267L;
 
@@ -193,7 +193,7 @@ public class FloatValidator extends AbstractNumberValidator {
      *   {@code Float} if valid or {@code null} if invalid.
      */
     @Override
-    protected Object processParsedValue(final Object value, final Format formatter) {
+    protected Float processParsedValue(final Object value, final Format formatter) {
         final double doubleValue = value instanceof Double ? (Double) value : Double.valueOf(((Number) value).doubleValue());
         if (doubleValue > 0) {
             if (doubleValue == Double.POSITIVE_INFINITY) {
